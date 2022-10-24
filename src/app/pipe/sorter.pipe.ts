@@ -11,9 +11,9 @@ export class SorterPipe implements PipeTransform {
    * @param key {string} - az objektumkulcs, amely alapján rendez
    * @returns {any[]} - a kulcs alapján rendezett tömb
    */
-  transform(value: any[], key: string): any[] {
+  transform(value: any[], key: string = ''): any[] {
     // A KÖVETKEZŐ SORT TÁVOLÍTSD EL!!!
-    return value;
+    if(!Array.isArray(value) || key ==='') return value;
 
     /**
      * FELADAT!
@@ -21,6 +21,10 @@ export class SorterPipe implements PipeTransform {
      * térj vissza a value változóval.
      */
 
+    return value.sort((a, b) =>{
+      if(Number.isInteger(a[key]) && Number.isInteger(b[key])) return a[key] - b[key];
+      return String(a[key]).toLowerCase().localeCompare(String(b[key]).toLowerCase());
+    })
 
 
     /**
